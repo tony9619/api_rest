@@ -31,3 +31,23 @@ STR_TO_DATE(sysdate(), '%Y-%m-%d'),user());
 insert into tb_usuarios (usuario,nombre,apellido,clave,fecha_gra,ultimo_usuario)
 values ('malvarado','Milagro','Alvardo','malvarado2019$',
 STR_TO_DATE(sysdate(), '%Y-%m-%d'),user());
+
+-- creacion de la funcion de validar usuario
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `validar_usuario_new`(
+p_usuario varchar(50),p_nombre varchar(50),
+p_apellido varchar(50),p_clave varchar(50)
+) RETURNS int(11)
+BEGIN
+	declare
+	existe int(11);
+    select count(usuario) into existe from tb_usuarios
+    where usuario=p_usuario;
+    if existe < 1 then
+		insert into tb_usuarios (usuario,nombre,apellido,clave,fecha_gra,ultimo_usuario)
+        values (p_usuario,p_nombre,p_apellido,p_clave,sysdate(),user());
+        return 1;
+    else
+		return 0;
+    end if;
+END

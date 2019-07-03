@@ -1,5 +1,9 @@
 <?php
 	require_once('db.php');
+
+	
+	$conexion = new mysqli('localhost','root','root','eshare','3306');
+	
 	
 	// funcion todos los usuarios
 
@@ -25,13 +29,20 @@
 		$clave = $array['clave'];
 		$fecha_gra = $array['fecha_gra'];
 		$ultimo_usuario = $array['ultimo_usuario'];
-		$Query = "
-		INSERT INTO tb_usuarios (usuario,nombre,apellido,clave,fecha_gra,ultimo_usuario)
-		VALUES ('$usuario','$nombre','$apellido','$clave','$fecha_gra','$ultimo_usuario')
-		";
-		NonQuery($Query);
-		echo $mensaje;
-		return true;
+
+		$conexion = new mysqli('127.0.0.1','root','root','eshare','3306');
+
+		$Query ="select validar_usuario_new('$usuario','$nombre','$apellido','$clave') as retorno from dual;";
+	
+		$var ;
+		$var_resultado = $conexion->query($Query);
+		if($var_resultado->num_rows>0)
+  		{
+			  while ($var_fila=$var_resultado->fetch_array()){
+					$var = $var_fila["retorno"];
+			  }
+		  }
+		  return $var;
 	}
 	
 	// funcion eliminar usuario

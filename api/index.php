@@ -43,7 +43,8 @@
 				switch ($var){
 					// End Point crear usuario	
 					case 'new_user';
-						crear_usuario($convertir);
+						$resp=crear_usuario($convertir);
+						print_r (json_encode($resp)); // imprima el JSON
 						http_response_code(200);
 					break;
 					// End Point Eliminar Usuario
