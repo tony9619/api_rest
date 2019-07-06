@@ -2,9 +2,6 @@
 	require_once('db.php');
 
 	
-	$conexion = new mysqli('localhost','root','root','eshare','3306');
-	
-	
 	// funcion todos los usuarios
 
 	function all_usuarios(){
@@ -27,8 +24,7 @@
 		$nombre = $array['nombre'];
 		$apellido = $array['apellido']; 
 		$clave = $array['clave'];
-		$fecha_gra = $array['fecha_gra'];
-		$ultimo_usuario = $array['ultimo_usuario'];
+		
 
 		$conexion = new mysqli('127.0.0.1','root','root','eshare','3306');
 

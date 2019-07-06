@@ -51,3 +51,13 @@ BEGIN
 		return 0;
     end if;
 END
+
+-- creacionde funcion edicion de usuario
+CREATE DEFINER=`root`@`localhost` FUNCTION `update_user`(
+p_user varchar(50),p_nombre varchar(50),p_apellido varchar(50),p_clave varchar(50)) RETURNS int(11)
+BEGIN
+	update tb_usuarios
+    set nombre =p_nombre, apellido=p_apellido,clave=p_clave
+    where usuario=p_user;
+    return 1;
+END
